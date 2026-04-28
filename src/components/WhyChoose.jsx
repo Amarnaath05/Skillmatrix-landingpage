@@ -1,75 +1,87 @@
 import React from 'react';
-import { Calendar, Clock, Award, Target } from 'lucide-react';
+import { Zap, Calendar, ShieldCheck, Briefcase } from 'lucide-react';
 
-const WhyChoose = () => {
+const WhyChoose = ({ darkMode }) => {
   const features = [
     {
-      icon: Target,
-      title: "Structured Assignments",
-      description: "Well-designed curriculum with clear objectives and progressive learning path to build your skills systematically.",
-      gradient: "from-blue-500 to-purple-500"
-    },
-    {
-      icon: Clock,
-      title: "Flexible Schedule",
-      description: "Learn at your own pace with our flexible timeline that fits around your academic and personal commitments.",
-      gradient: "from-purple-500 to-indigo-500"
-    },
-    {
-      icon: Award,
-      title: "Verified Certificates",
-      description: "Earn industry-recognized certificates that validate your skills and enhance your resume credibility.",
-      gradient: "from-indigo-500 to-teal-500"
+      icon: Zap,
+      title: "Lightning Fast Learning",
+      description: "Accelerate your skills with our optimized learning paths designed for rapid progress and immediate impact.",
+      iconGradient: "from-orange-400 to-yellow-400",
+      glowGradient: "from-orange-400 to-yellow-400"
     },
     {
       icon: Calendar,
+      title: "Flexible Schedule",
+      description: "Learn at your own pace with our flexible timeline that fits around your academic and personal commitments.",
+      iconGradient: "from-blue-500 to-indigo-500",
+      glowGradient: "from-blue-500 to-indigo-500"
+    },
+    {
+      icon: ShieldCheck,
+      title: "Verified Certificates",
+      description: "Earn industry-recognized certificates that validate your skills and enhance your resume credibility.",
+      iconGradient: "from-green-400 to-emerald-500",
+      glowGradient: "from-green-400 to-emerald-500"
+    },
+    {
+      icon: Briefcase,
       title: "Real Projects",
       description: "Work on actual industry projects that mirror real-world challenges and build your portfolio.",
-      gradient: "from-teal-500 to-orange-500"
+      iconGradient: "from-purple-500 to-pink-500",
+      glowGradient: "from-purple-500 to-pink-500"
     }
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-[#020617] via-[#0b0f19] to-[#020617]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className={`py-20 px-6 transition-colors duration-500 ${
+      darkMode ? 'bg-[#020617] text-white' : 'bg-white text-gray-900'
+    }`}>
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Why Choose
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-              SkillMatrix?
-            </span>
+        <div className="text-center">
+          <h2 className={`text-4xl md:text-5xl font-semibold text-center ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
+            Why Choose Infospark Technologies?
           </h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className={`text-center mt-4 max-w-2xl mx-auto text-lg ${
+            darkMode ? 'text-gray-400' : 'text-gray-600'
+          }`}>
             We provide the perfect blend of theoretical knowledge and practical experience to accelerate your career growth
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Cards Grid */}
+        <div className="grid md:grid-cols-4 gap-6 mt-16">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8 hover:bg-gradient-to-br hover:from-blue-500/10 hover:to-purple-500/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl animate-fade-up"
-              style={{ animationDelay: `${index * 0.2}s` }}
+              className={`relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                darkMode ? 'bg-[#0a1628] border-white/10' : 'bg-gray-50 border-gray-200'
+              }`}
             >
-              {/* Icon */}
-              <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-8 h-8 text-white" />
+              {/* Background Glow */}
+              <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br ${feature.glowGradient}`}></div>
+
+              {/* Icon Box */}
+              <div className={`w-12 h-12 flex items-center justify-center rounded-xl text-white mb-4 bg-gradient-to-br ${feature.iconGradient}`}>
+                <feature.icon className="w-6 h-6" />
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
+              {/* Card Title */}
+              <h3 className={`font-semibold text-lg ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>
                 {feature.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-300 leading-relaxed text-sm">
+              <p className={`text-sm mt-2 leading-relaxed ${
+                darkMode ? 'text-gray-400' : 'text-gray-600'
+              }`}>
                 {feature.description}
               </p>
-
-              {/* Hover Effect Background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 rounded-xl"></div>
             </div>
           ))}
         </div>

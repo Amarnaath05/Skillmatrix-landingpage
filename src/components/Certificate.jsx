@@ -1,61 +1,100 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Award, ExternalLink, CheckCircle } from 'lucide-react';
 
 const Certificate = () => {
-  return (
-    <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Industry-Recognized Certificates
-            </h2>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Earn verified certificates that showcase your skills to employers. Our certificates are 
-              recognized by leading companies and can be verified online for authenticity.
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">Verifiable online with unique certificate ID</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">LinkedIn profile integration</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">Industry-recognized credentials</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
-                <span className="text-gray-300">Lifetime validity</span>
-              </div>
-            </div>
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105">
-                <span className="flex items-center space-x-2">
-                  <Award className="w-5 h-5" />
-                  <span>Start Your Journey</span>
-                </span>
-              </button>
-              
-              <button className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
-                <span className="flex items-center space-x-2">
-                  <ExternalLink className="w-5 h-5" />
-                  <span>Verify Certificate</span>
-                </span>
-              </button>
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX = -(y - rect.height / 2) / 18;
+    const rotateY = (x - rect.width / 2) / 18;
+
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+  };
+
+  return (
+    <section className="bg-[#020617] text-white py-24 px-6">
+      <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        {/* Left Side (Text) */}
+        <div>
+          {/* Top Tag */}
+          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 border border-white/10 text-xs uppercase tracking-wider text-gray-300">
+            VERIFIED CREDENTIAL
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-4xl md:text-5xl font-serif mt-4">
+            Earn a Recognized <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Certificate of Completion</span>
+          </h2>
+
+          {/* Description */}
+          <p className="text-gray-400 mt-4 leading-relaxed">
+            Showcase your achievements with industry-recognized certificates that verify your skills and open doors to top opportunities.
+          </p>
+
+          {/* Checklist Items */}
+          <div className="space-y-3 mt-6">
+            <div className="flex items-center gap-3 text-gray-300">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>Verifiable online with unique certificate ID</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-300">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>LinkedIn profile integration</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-300">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>Industry-recognized credentials</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-300">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <span>Lifetime validity</span>
             </div>
           </div>
 
-          {/* Right Certificate Mock */}
-          <div className="relative">
-            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border-2 border-white/20 p-8 shadow-2xl">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <button className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium shadow-lg hover:opacity-90 transition">
+              <span className="flex items-center gap-2">
+                <Award className="w-4 h-4" />
+                Start Your Journey
+              </span>
+            </button>
+            
+            <button className="px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition">
+              <span className="flex items-center gap-2">
+                <ExternalLink className="w-4 h-4" />
+                Verify Certificate
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side (3D Interactive Card) */}
+        <div 
+          className="relative [perspective:1000px]"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Certificate Card */}
+          <div 
+            style={{
+              transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+              transformStyle: 'preserve-3d'
+            }}
+            className="relative transition-transform duration-200 ease-out"
+          >
+            <div 
+              style={{ transform: "translateZ(20px)" }}
+              className="bg-[#0a1628] border border-white/10 rounded-2xl p-8 shadow-2xl"
+            >
               {/* Certificate Header */}
               <div className="text-center mb-8">
                 <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -91,16 +130,21 @@ const Certificate = () => {
                   <p className="text-white font-semibold">CA-2026-0427</p>
                 </div>
               </div>
+
+              {/* Glare Effect */}
+              <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300"/>
+              </div>
             </div>
 
-            {/* Verified Badge */}
-            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2">
-              <CheckCircle className="w-5 h-5" />
-              <span className="font-semibold">Verified & Valid</span>
+            {/* Floating Verified Badge */}
+            <div 
+              style={{ transform: "translateZ(50px)" }}
+              className="absolute top-[-12px] right-[-12px] bg-green-500 text-white px-4 py-1 rounded-full flex items-center gap-2 shadow-lg"
+            >
+              <CheckCircle className="w-4 h-4" />
+              <span className="text-sm font-medium">Verified & Valid</span>
             </div>
-
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl -z-10"></div>
           </div>
         </div>
       </div>

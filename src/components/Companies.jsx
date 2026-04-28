@@ -1,63 +1,109 @@
 import React from 'react';
 
 const Companies = () => {
-  const companies = [
-    "Meta", "Netflix", "Apple", "Google", "Microsoft", 
-    "Adobe", "Intel", "Samsung", "Uber", "LinkedIn",
-    "Amazon", "Tesla", "IBM", "Oracle", "Salesforce"
+  const row1Companies = [
+    { name: "Netflix", color: "text-red-400", borderColor: "border-red-500/30", glow: "shadow-[0_0_12px_rgba(239,68,68,0.4)]" },
+    { name: "Google", color: "text-blue-400", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(96,165,250,0.4)]" },
+    { name: "Amazon", color: "text-orange-400", borderColor: "border-orange-500/30", glow: "shadow-[0_0_12px_rgba(251,146,60,0.4)]" },
+    { name: "Meta", color: "text-blue-500", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(59,130,246,0.4)]" },
+    { name: "Apple", color: "text-white", borderColor: "border-white/30", glow: "shadow-[0_0_12px_rgba(255,255,255,0.4)]" },
+    { name: "Microsoft", color: "text-cyan-400", borderColor: "border-cyan-500/30", glow: "shadow-[0_0_12px_rgba(34,211,238,0.4)]" },
+    { name: "Tesla", color: "text-red-500", borderColor: "border-red-500/30", glow: "shadow-[0_0_12px_rgba(239,68,68,0.4)]" },
+    { name: "LinkedIn", color: "text-blue-600", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(37,99,235,0.4)]" }
+  ];
+
+  const row2Companies = [
+    { name: "Adobe", color: "text-red-600", borderColor: "border-red-500/30", glow: "shadow-[0_0_12px_rgba(220,38,38,0.4)]" },
+    { name: "Intel", color: "text-blue-700", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(29,78,216,0.4)]" },
+    { name: "Samsung", color: "text-blue-800", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(30,58,138,0.4)]" },
+    { name: "Uber", color: "text-gray-300", borderColor: "border-gray-500/30", glow: "shadow-[0_0_12px_rgba(209,213,219,0.4)]" },
+    { name: "IBM", color: "text-blue-900", borderColor: "border-blue-500/30", glow: "shadow-[0_0_12px_rgba(30,58,138,0.4)]" },
+    { name: "Oracle", color: "text-red-700", borderColor: "border-red-500/30", glow: "shadow-[0_0_12px_rgba(185,28,28,0.4)]" },
+    { name: "Salesforce", color: "text-cyan-500", borderColor: "border-cyan-500/30", glow: "shadow-[0_0_12px_rgba(6,182,212,0.4)]" },
+    { name: "Spotify", color: "text-green-500", borderColor: "border-green-500/30", glow: "shadow-[0_0_12px_rgba(34,197,94,0.4)]" }
   ];
 
   // Duplicate for infinite scroll
-  const duplicatedCompanies = [...companies, ...companies];
+  const duplicatedRow1 = [...row1Companies, ...row1Companies];
+  const duplicatedRow2 = [...row2Companies, ...row2Companies];
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-[#020617] via-[#0b0f19] to-[#020617]">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Companies Where Our
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-              Learners Have Progressed
-            </span>
+    <section className="bg-[#020617] text-white py-24 px-6 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center">
+          <div className="text-cyan-400 text-xs tracking-[0.3em] uppercase text-center">
+            SUCCESS STORIES
+          </div>
+          <h2 className="text-4xl md:text-5xl text-center font-serif mt-4">
+            Companies Where Our <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Learners Have Progressed</span>
           </h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-gray-400 text-center mt-4 max-w-2xl mx-auto">
             Our alumni have successfully transitioned to top-tier companies worldwide
           </p>
         </div>
 
-        {/* Infinite Scroll Companies Row */}
-        <div className="relative overflow-hidden">
-          <div className="flex animate-slide-right">
-            {duplicatedCompanies.map((company, index) => (
+        {/* Marquee Container */}
+        <div className="relative mt-16 overflow-hidden group">
+          {/* Row 1 - Moving Left */}
+          <div className="flex gap-6 w-max animate-[marquee_20s_linear_infinite] group-hover:[animation-play-state:paused]">
+            {duplicatedRow1.map((company, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 px-6 py-3 mx-2 bg-white/5 backdrop-blur-lg border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                className={`flex items-center gap-2 px-5 py-2 rounded-full bg-[#0a1628] border ${company.borderColor} text-sm font-medium transition-all duration-300 ${company.color} ${company.glow} opacity-60 group-hover:opacity-30 hover:opacity-100 hover:scale-105 hover:shadow-lg`}
               >
-                <span className="text-white font-medium">
-                  {company}
-                </span>
+                {company.name}
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 - Moving Right */}
+          <div className="flex gap-6 w-max animate-[marquee_20s_linear_infinite_reverse] group-hover:[animation-play-state:paused] mt-6">
+            {duplicatedRow2.map((company, index) => (
+              <div
+                key={index}
+                className={`flex items-center gap-2 px-5 py-2 rounded-full bg-[#0a1628] border ${company.borderColor} text-sm font-medium transition-all duration-300 ${company.color} ${company.glow} opacity-60 group-hover:opacity-30 hover:opacity-100 hover:scale-105 hover:shadow-lg`}
+              >
+                {company.name}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Additional Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="text-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-2">500+</div>
-            <div className="text-gray-300">Company Partnerships</div>
+        {/* Metric Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mt-16 max-w-5xl mx-auto">
+          <div className="p-6 rounded-xl bg-[#0a1628] border border-white/5 text-center">
+            <div className="text-3xl font-semibold text-cyan-400">500+</div>
+            <div className="text-gray-400 mt-2">Company Partnerships</div>
           </div>
-          <div className="text-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500 mb-2">85%</div>
-            <div className="text-gray-300">Placement Rate</div>
+          <div className="p-6 rounded-xl bg-[#0a1628] border border-white/5 text-center">
+            <div className="text-3xl font-semibold text-cyan-400">85%</div>
+            <div className="text-gray-400 mt-2">Placement Rate</div>
           </div>
-          <div className="text-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-            <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 mb-2">$75K</div>
-            <div className="text-gray-300">Average Starting Salary</div>
+          <div className="p-6 rounded-xl bg-[#0a1628] border border-white/5 text-center">
+            <div className="text-3xl font-semibold text-cyan-400">$75K</div>
+            <div className="text-gray-400 mt-2">Average Starting Salary</div>
           </div>
         </div>
+
+        {/* Footer Note */}
+        <div className="text-center text-gray-500 italic mt-10 text-sm">
+          Join thousands of successful professionals who started their journey with us
+        </div>
+
+        {/* CTA Button */}
+        <button className="mt-6 mx-auto block px-6 py-3 rounded-full bg-cyan-500 text-white hover:bg-cyan-600 transition">
+          View Success Stories
+        </button>
       </div>
+
+      {/* Custom Animation Styles */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 };

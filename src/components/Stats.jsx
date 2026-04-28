@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const Stats = () => {
+const Stats = ({ darkMode }) => {
   const [counters, setCounters] = useState([0, 0, 0, 0]);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
@@ -91,18 +91,26 @@ const Stats = () => {
   };
 
   return (
-    <section ref={sectionRef} className="bg-[#020617] text-white py-24 px-6">
+    <section ref={sectionRef} className={`py-24 px-6 transition-colors duration-500 ${
+      darkMode ? 'bg-[#020617] text-white' : 'bg-white text-gray-900'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Top Pill Tag */}
         <div className="text-center mb-8">
-          <div className="inline-block px-4 py-1 rounded-full border border-cyan-400/30 text-cyan-400 text-xs tracking-widest bg-white/5 backdrop-blur-md">
+          <div className={`inline-block px-4 py-1 rounded-full border text-xs tracking-widest backdrop-blur-md ${
+            darkMode 
+              ? 'border-cyan-400/30 text-cyan-400 bg-white/5' 
+              : 'border-gray-300 text-gray-600 bg-gray-50'
+          }`}>
             REAL-TIME PLATFORM GROWTH POWERED BY ACTIVE LEARNERS COMPLETING ASSIGNMENTS.
           </div>
         </div>
 
         {/* Main Heading */}
         <div className="text-center mb-6">
-          <h2 className="font-serif text-5xl md:text-6xl text-white">
+          <h2 className={`font-serif text-5xl md:text-6xl ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             Trusted by
           </h2>
           <h2 className="font-serif text-5xl md:text-6xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
@@ -111,7 +119,9 @@ const Stats = () => {
         </div>
 
         {/* Description */}
-        <p className="text-gray-400 max-w-2xl mx-auto mt-4 text-lg text-center">
+        <p className={`max-w-2xl mx-auto mt-4 text-lg text-center ${
+          darkMode ? 'text-gray-400' : 'text-gray-600'
+        }`}>
           Our platform connects ambitious students with real-world internship opportunities, 
           building careers through hands-on experience and professional mentorship.
         </p>
@@ -121,13 +131,17 @@ const Stats = () => {
           {cardData.map((card, index) => (
             <div
               key={index}
-              className="relative p-6 rounded-2xl bg-[#0a1628] border border-white/10 overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              className={`relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                darkMode ? 'bg-[#0a1628] border-white/10' : 'bg-gray-50 border-gray-200'
+              }`}
             >
               {/* Background Glow */}
               <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br ${card.gradient}`}></div>
               
               {/* Live Metric Label */}
-              <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 relative z-10">
+              <div className={`flex items-center gap-2 text-xs mb-4 relative z-10 ${
+                darkMode ? 'text-gray-400' : 'text-gray-500'
+              }`}>
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span>LIVE METRIC</span>
               </div>
@@ -138,12 +152,16 @@ const Stats = () => {
               </div>
 
               {/* Card Title */}
-              <div className="text-white font-semibold tracking-wide uppercase relative z-10">
+              <div className={`font-semibold tracking-wide uppercase relative z-10 ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>
                 {card.title}
               </div>
 
               {/* Card Description */}
-              <div className="text-gray-400 text-sm mt-2 relative z-10">
+              <div className={`text-sm mt-2 relative z-10 ${
+                darkMode ? 'text-gray-400' : 'text-gray-600'
+              }`}>
                 {card.description}
               </div>
             </div>
@@ -151,13 +169,19 @@ const Stats = () => {
         </div>
 
         {/* Bottom Quote */}
-        <div className="text-gray-500 italic text-center mt-12 max-w-3xl mx-auto">
+        <div className={`italic text-center mt-12 max-w-3xl mx-auto ${
+          darkMode ? 'text-gray-500' : 'text-gray-400'
+        }`}>
           "Our growth is driven by real learners completing real assignments — not passive course enrollments."
         </div>
 
         {/* CTA Button */}
         <div className="text-center mt-8">
-          <button className="px-8 py-3 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition inline-flex items-center gap-2 hover:translate-x-1">
+          <button className={`px-8 py-3 rounded-full transition inline-flex items-center gap-2 hover:translate-x-1 ${
+            darkMode 
+              ? 'bg-blue-500 text-white hover:bg-blue-600' 
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}>
             Start Your Internship
             <ArrowRight className="w-4 h-4" />
           </button>

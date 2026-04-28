@@ -1,111 +1,109 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { UserPlus, Mail, ClipboardCheck, Award } from 'lucide-react';
 
-const ProcessFlow = () => {
+const ProcessFlow = ({ darkMode }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [lineWidth, setLineWidth] = useState(0);
 
   const steps = [
-    { id: 1, name: 'Discover', description: 'Identify your goals and interests' },
-    { id: 2, name: 'Define', description: 'Create a personalized learning path' },
-    { id: 3, name: 'Design', description: 'Build real-world projects' },
-    { id: 4, name: 'Deliver', description: 'Launch your career with confidence' }
+    { 
+      icon: UserPlus,
+      number: '01',
+      title: 'Apply',
+      description: 'Fill out the simple registration form. It\'s completely free and takes less than 2 minutes.'
+    },
+    { 
+      icon: Mail,
+      number: '02',
+      title: 'Selection',
+      description: 'Get your selection letter via email. Join our community channels for updates. You\'ll receive a curated set of practical assignments for your selected domain.'
+    },
+    { 
+      icon: ClipboardCheck,
+      number: '03',
+      title: 'Complete Tasks',
+      description: 'Receive task lists for your domain. Complete them within the 4-week deadline. Only completed assignments are evaluated for certification.'
+    },
+    { 
+      icon: Award,
+      number: '04',
+      title: 'Get Certified',
+      description: 'Submit your work. Upon verification, receive your internship completion certificate.'
+    }
   ];
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLineWidth(100);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [steps.length]);
-
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-[#020617] via-[#0b0f19] to-[#020617]">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Your Journey to
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-              Success
-            </span>
+    <section className={`py-24 px-6 relative transition-colors duration-500 ${
+      darkMode ? 'bg-[#020617] text-white' : 'bg-white text-gray-900'
+    }`}>
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center">
+          <div className={`text-xs tracking-[0.3em] uppercase text-center font-medium ${
+            darkMode ? 'text-blue-400' : 'text-blue-600'
+          }`}>
+            PROCESS
+          </div>
+          <h2 className={`text-4xl md:text-5xl text-center mt-4 font-serif ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
+            How It Works?
           </h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Follow our proven 4-step process to transform your skills into real-world experience
-          </p>
         </div>
 
-        {/* Process Flow */}
-        <div className="relative">
-          {/* Progress Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-white/10 -translate-y-1/2 hidden md:block">
-            <div 
-              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000 ease-out"
-              style={{ width: `${lineWidth}%` }}
-            />
-          </div>
-
-          {/* Animated Dot */}
+        {/* Timeline Structure */}
+        <div className="relative mt-20 max-w-6xl mx-auto">
+          {/* Background Line (Inactive) */}
+          <div className="absolute top-10 left-0 w-full h-[2px] bg-blue-900/40"></div>
+          
+          {/* Active Progress Line */}
           <div 
-            className="absolute top-1/2 w-4 h-4 bg-blue-500 rounded-full -translate-y-1/2 hidden md:block animate-pulse"
-            style={{ left: `${lineWidth}%`, transform: 'translate(-50%, -50%)' }}
-          />
+            className="absolute top-10 left-0 h-[2px] bg-cyan-400 transition-all duration-500"
+            style={{ width: `${activeStep * 25}%` }}
+          ></div>
 
-          {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-            {steps.map((step, index) => (
-              <div 
-                key={step.id}
-                className="text-center animate-fade-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                {/* Step Circle */}
-                <div className="relative mb-6">
-                  <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center transition-all duration-500 ${
-                    activeStep >= index 
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-110' 
-                      : 'bg-white/10 border border-white/20'
-                  }`}>
-                    {activeStep >= index ? (
-                      <CheckCircle className="w-10 h-10 text-white" />
-                    ) : (
-                      <Circle className="w-10 h-10 text-white/50" />
-                    )}
+          {/* Steps Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col items-center text-center group cursor-pointer transition-all duration-300 group-hover:-translate-y-1"
+                  onMouseEnter={() => setActiveStep(index + 1)}
+                >
+                  {/* Icon Box */}
+                  <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-[#0a1628] border border-white/10 transition-all duration-300 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                    {/* Icon */}
+                    <Icon className="w-6 h-6 text-cyan-400" />
+                    
+                    {/* Step Number Badge */}
+                    <div className={`absolute -top-3 -right-3 w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 ${
+                      activeStep > index 
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
+                        : 'bg-[#0f172a] text-gray-400 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 group-hover:text-white'
+                    }`}>
+                      {step.number}
+                    </div>
                   </div>
-                  
-                  {/* Animated Glow */}
-                  {activeStep === index && (
-                    <div className="absolute inset-0 w-20 h-20 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse opacity-30" />
-                  )}
+
+                  {/* Step Title */}
+                  <h3 className="mt-4 text-white text-lg font-medium">
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-400 text-sm mt-2 max-w-[220px] leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
-
-                {/* Step Content */}
-                <h3 className="text-xl font-bold text-white mb-2">{step.name}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{step.description}</p>
-
-                {/* Arrow for mobile */}
-                {index < steps.length - 1 && (
-                  <div className="flex justify-center mt-4 md:hidden">
-                    <ArrowRight className="w-6 h-6 text-white/30" />
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 bg-size-200 animate-gradient">
-            Start Your Journey
-          </button>
+        {/* Bottom Text */}
+        <div className="text-center text-gray-500 italic mt-16">
+          Our internships focus on proving skills through completed work, not passive learning.
         </div>
       </div>
     </section>

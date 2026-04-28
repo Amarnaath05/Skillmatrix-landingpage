@@ -19,7 +19,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
             </div>
             <span className={`font-bold text-xl ${
               darkMode ? 'text-white' : 'text-gray-900'
-            }`}>SkillMatrix</span>
+            }`}>Infospark Technologies</span>
           </div>
         </div>
 
