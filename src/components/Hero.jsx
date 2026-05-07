@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, ExternalLink, Users, Award, BookOpen, TrendingUp } from 'lucide-react';
 
-const Hero = ({ darkMode }) => {
+const Hero = () => {
   const [scrambledText, setScrambledText] = useState('Real World Experience');
   const [isScrambling, setIsScrambling] = useState(false);
   
@@ -80,69 +81,141 @@ const Hero = ({ darkMode }) => {
         clearInterval(hoverIntervalRef.current);
       }
     };
-  }, [darkMode]);
+  }, []);
 
   return (
-    <section id="home" className={`min-h-screen flex flex-col justify-center items-center text-center pt-16 transition-colors duration-500 ${
-      darkMode ? 'bg-[#020617]' : 'bg-white'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6 space-y-6">
+    <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center pt-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto px-6 space-y-8 relative z-10"
+      >
         {/* Badge */}
-        <div className={`inline-flex items-center px-4 py-1 rounded-full text-sm backdrop-blur-sm ${
-          darkMode 
-            ? 'border border-white/20 text-white/80' 
-            : 'border border-gray-300 text-gray-600'
-        }`}>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="inline-flex items-center px-6 py-2 rounded-full text-sm font-medium bg-white/80 backdrop-blur-sm border border-blue-100 text-blue-600 shadow-sm"
+        >
           #1 PLATFORM FOR VIRTUAL INTERNSHIPS
-        </div>
+        </motion.div>
 
         {/* Hero Heading */}
-        <h1 className={`font-serif text-5xl md:text-7xl font-semibold tracking-tight leading-tight ${
-          darkMode ? 'text-white' : 'text-gray-900'
-        }`}>
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-serif text-5xl md:text-7xl font-bold tracking-tight leading-tight text-gray-900"
+        >
           <span className="block">Where Learning Meets</span>
-          <span 
-            className="block bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent cursor-pointer transition-all duration-300"
+          <motion.span 
+            className="block bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent cursor-pointer"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             {scrambledText}
-          </span>
-        </h1>
+          </motion.span>
+        </motion.h1>
 
         {/* Description */}
-        <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${
-          darkMode ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-gray-600"
+        >
           Gain hands-on experience through our virtual internship programs. Work on real projects, 
           build your portfolio, and earn verified certificates that employers value.
-        </p>
+        </motion.p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className={`group px-6 py-3 rounded-xl font-medium transition-all hover:translate-x-1 ${
-            darkMode 
-              ? 'bg-white text-black hover:bg-gray-200' 
-              : 'bg-black text-white hover:bg-gray-800'
-          }`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+        >
+          <motion.button 
+            className="group px-8 py-4 rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <span className="flex items-center space-x-2">
               <span>Apply for Internship</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
-          </button>
+          </motion.button>
           
-          <button className={`px-6 py-3 rounded-xl font-medium transition-all ${
-            darkMode 
-              ? 'border border-white/20 text-white bg-transparent hover:bg-white/10' 
-              : 'border border-gray-300 text-gray-900 bg-transparent hover:bg-gray-100'
-          }`}>
+          <motion.button 
+            className="px-8 py-4 rounded-full font-medium bg-white border border-slate-300 text-gray-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-sm hover:shadow-md"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
             <span className="flex items-center space-x-2">
               <span>Verify Certificate</span>
               <ExternalLink className="w-5 h-5" />
             </span>
-          </button>
+          </motion.button>
+        </motion.div>
+      </motion.div>
+
+      {/* Floating Stat Cards */}
+      <motion.div 
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block"
+      >
+        <div className="space-y-4">
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-blue-100"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <Users className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">1.1M+</div>
+                <div className="text-sm text-gray-600">Active Learners</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-purple-100"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                <Award className="w-5 h-5 text-purple-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">770K+</div>
+                <div className="text-sm text-gray-600">Certificates Issued</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-green-100"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                <BookOpen className="w-5 h-5 text-green-600" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-gray-900">694</div>
+                <div className="text-sm text-gray-600">Partner Companies</div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { UserPlus, Mail, ClipboardCheck, Award } from 'lucide-react';
 
-const ProcessFlow = ({ darkMode }) => {
+const ProcessFlow = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
@@ -32,81 +33,120 @@ const ProcessFlow = ({ darkMode }) => {
   ];
 
   return (
-    <section className={`py-24 px-6 relative transition-colors duration-500 ${
-      darkMode ? 'bg-[#020617] text-white' : 'bg-white text-gray-900'
-    }`}>
-      <div className="max-w-6xl mx-auto">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="py-24 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="max-w-6xl mx-auto"
+      >
         {/* Header */}
-        <div className="text-center">
-          <div className={`text-xs tracking-[0.3em] uppercase text-center font-medium ${
-            darkMode ? 'text-blue-400' : 'text-blue-600'
-          }`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="text-xs tracking-[0.3em] uppercase text-center font-medium text-blue-600">
             PROCESS
           </div>
-          <h2 className={`text-4xl md:text-5xl text-center mt-4 font-serif ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h2 className="text-4xl md:text-5xl text-center mt-4 font-serif text-gray-900">
             How It Works?
           </h2>
-        </div>
+        </motion.div>
 
         {/* Timeline Structure */}
-        <div className="relative mt-20 max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="relative mt-20 max-w-6xl mx-auto"
+        >
           {/* Background Line (Inactive) */}
-          <div className="absolute top-10 left-0 w-full h-[2px] bg-blue-900/40"></div>
+          <div className="absolute top-10 left-0 w-full h-[2px] bg-slate-200"></div>
           
           {/* Active Progress Line */}
-          <div 
-            className="absolute top-10 left-0 h-[2px] bg-cyan-400 transition-all duration-500"
-            style={{ width: `${activeStep * 25}%` }}
-          ></div>
+          <motion.div 
+            animate={{ width: `${activeStep * 25}%` }}
+            transition={{ duration: 0.5 }}
+            className="absolute top-10 left-0 h-[2px] bg-blue-600"
+          ></motion.div>
 
           {/* Steps Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10"
+          >
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="flex flex-col items-center text-center group cursor-pointer transition-all duration-300 group-hover:-translate-y-1"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -8 }}
+                  className="flex flex-col items-center text-center group cursor-pointer transition-all duration-300"
                   onMouseEnter={() => setActiveStep(index + 1)}
                 >
                   {/* Icon Box */}
-                  <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-[#0a1628] border border-white/10 transition-all duration-300 group-hover:border-cyan-400 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                  <div className="relative w-20 h-20 flex items-center justify-center rounded-2xl bg-white border border-slate-200 shadow-lg transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-xl">
                     {/* Icon */}
-                    <Icon className="w-6 h-6 text-cyan-400" />
+                    <Icon className="w-6 h-6 text-blue-600" />
                     
                     {/* Step Number Badge */}
-                    <div className={`absolute -top-3 -right-3 w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 ${
-                      activeStep > index 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'
-                        : 'bg-[#0f172a] text-gray-400 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 group-hover:text-white'
-                    }`}>
+                    <motion.div 
+                      animate={{ 
+                        backgroundColor: activeStep > index ? '#2563EB' : '#f1f5f9',
+                        color: activeStep > index ? '#ffffff' : '#64748b'
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute -top-3 -right-3 w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold border-2 border-white"
+                    >
                       {step.number}
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Step Title */}
-                  <h3 className="mt-4 text-white text-lg font-medium">
+                  <h3 className="mt-4 text-gray-900 text-lg font-medium">
                     {step.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-gray-400 text-sm mt-2 max-w-[220px] leading-relaxed">
+                  <p className="text-gray-600 text-sm mt-2 max-w-[220px] leading-relaxed">
                     {step.description}
                   </p>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom Text */}
-        <div className="text-center text-gray-500 italic mt-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center text-gray-500 italic mt-16"
+        >
           Our internships focus on proving skills through completed work, not passive learning.
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

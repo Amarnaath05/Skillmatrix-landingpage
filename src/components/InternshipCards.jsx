@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Globe, 
   Smartphone, 
-  Brain, 
+  BrainCircuit, 
+  BarChart3, 
   Database, 
   Cpu, 
   Code2, 
@@ -55,7 +57,7 @@ const InternshipCards = () => {
       duration: "8-12 weeks",
       level: "Beginner to Advanced",
       students: 2500,
-      iconBg: "bg-blue-500"
+      iconBg: "bg-gradient-to-br from-blue-500 to-indigo-600"
     },
     {
       icon: Smartphone,
@@ -64,25 +66,25 @@ const InternshipCards = () => {
       duration: "10-14 weeks",
       level: "Intermediate",
       students: 1800,
-      iconBg: "bg-green-500"
+      iconBg: "bg-gradient-to-br from-emerald-500 to-green-600"
     },
     {
-      icon: Brain,
+      icon: BrainCircuit,
       title: "Machine Learning",
       description: "Dive into AI/ML with hands-on projects in computer vision and NLP.",
       duration: "12-16 weeks",
       level: "Advanced",
       students: 1200,
-      iconBg: "bg-purple-500"
+      iconBg: "bg-gradient-to-br from-violet-500 to-purple-600"
     },
     {
-      icon: Database,
+      icon: BarChart3,
       title: "Data Science",
       description: "Master data analysis, visualization, and statistical modeling techniques.",
       duration: "10-14 weeks",
       level: "Intermediate",
       students: 1600,
-      iconBg: "bg-indigo-500"
+      iconBg: "bg-gradient-to-br from-cyan-500 to-sky-600"
     },
     {
       icon: Cpu,
@@ -91,7 +93,7 @@ const InternshipCards = () => {
       duration: "14-18 weeks",
       level: "Advanced",
       students: 900,
-      iconBg: "bg-pink-500"
+      iconBg: "bg-gradient-to-br from-pink-500 to-rose-600"
     },
     {
       icon: Code2,
@@ -100,7 +102,7 @@ const InternshipCards = () => {
       duration: "8-12 weeks",
       level: "Intermediate",
       students: 1400,
-      iconBg: "bg-orange-500"
+      iconBg: "bg-gradient-to-br from-orange-500 to-amber-600"
     },
     {
       icon: Coffee,
@@ -109,7 +111,7 @@ const InternshipCards = () => {
       duration: "10-14 weeks",
       level: "Intermediate",
       students: 2000,
-      iconBg: "bg-yellow-500"
+      iconBg: "bg-gradient-to-br from-yellow-500 to-orange-500"
     },
     {
       icon: Terminal,
@@ -118,7 +120,7 @@ const InternshipCards = () => {
       duration: "8-12 weeks",
       level: "Beginner to Advanced",
       students: 3200,
-      iconBg: "bg-cyan-500"
+      iconBg: "bg-gradient-to-br from-cyan-500 to-blue-600"
     },
     {
       icon: Cloud,
@@ -161,40 +163,63 @@ const InternshipCards = () => {
   return (
     <>
       {/* Internship Section */}
-      <section className="bg-[#020617] py-24 px-6 text-white">
-        <div className="max-w-6xl mx-auto text-center">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="py-24 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50"
+      >
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto text-center"
+        >
           {/* Header */}
-          <div className="text-cyan-400 text-xs tracking-widest uppercase font-semibold mb-3">
+          <div className="text-blue-600 text-xs tracking-widest uppercase font-semibold mb-3">
             OPPORTUNITIES
           </div>
-          <h2 className="text-4xl md:text-5xl font-sans font-medium">
-            Explore Our <span className="text-cyan-400">Internships</span>
+          <h2 className="text-4xl md:text-5xl font-sans font-medium text-gray-900">
+            Explore Our <span className="text-blue-600">Internships</span>
           </h2>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
             Choose from our wide range of virtual internship programs and kickstart your career in tech
           </p>
 
           {/* Card Grid */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-16"
+          >
             {internships.map((internship, index) => {
               const Icon = internship.icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-[#0a1628] border border-white/10 rounded-2xl p-6 text-left transition-all duration-300 hover:translate-y-[-8px] hover:shadow-xl hover:border-cyan-400/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.05 * index }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -8 }}
+                  className="bg-white border border-slate-200 rounded-3xl p-6 text-left transition-all duration-300 hover:shadow-xl hover:border-blue-300"
                 >
                   {/* Icon Box */}
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${internship.iconBg}`}>
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg border border-white/40 mb-6 ${internship.iconBg}`}>
+                    <Icon className="w-7 h-7 text-white stroke-[2.4] drop-shadow-sm" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-white font-sans">
+                  <h3 className="text-lg font-semibold text-gray-900 font-sans">
                     {internship.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-gray-400 text-sm mt-2 leading-relaxed font-sans">
+                  <p className="text-gray-600 text-sm mt-2 leading-relaxed font-sans">
                     {internship.description}
                   </p>
 
@@ -214,63 +239,89 @@ const InternshipCards = () => {
                   </div>
 
                   {/* Apply Link */}
-                  <a 
+                  <motion.a 
                     href="#" 
-                    className="text-cyan-400 font-medium mt-4 inline-flex items-center gap-2 hover:gap-3 transition-all font-sans"
+                    className="text-blue-600 font-medium mt-4 inline-flex items-center gap-2 hover:gap-3 transition-all font-sans"
+                    whileHover={{ x: 4 }}
                   >
                     Apply Now
                     <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
+                  </motion.a>
+                </motion.div>
               );
             })}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
       {/* FAQ Section */}
-      <section className="bg-[#020617] py-24 px-6 text-white">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-serif text-center">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="py-24 px-6 bg-gradient-to-br from-white via-slate-50 to-gray-50"
+      >
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-4xl font-serif text-center text-gray-900">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-400 text-center mt-4">
+          <p className="text-gray-600 text-center mt-4">
             Got questions? We've got answers.
           </p>
 
-          <div className="mt-10 space-y-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-10 space-y-4"
+          >
             {faqs.map((faq, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.05 * index }}
+                viewport={{ once: true }}
                 onClick={() => toggle(index)}
-                className="bg-[#0a1628] border border-white/10 rounded-xl p-5 cursor-pointer transition-all"
+                className="bg-white border border-slate-200 rounded-2xl p-5 cursor-pointer transition-all hover:shadow-lg hover:border-blue-300"
               >
                 <div className="flex justify-between items-center">
-                  <h3 className="font-semibold text-white">
+                  <h3 className="font-semibold text-gray-900">
                     {faq.question}
                   </h3>
-                  <span
-                    className={`transition-transform duration-300 ${
-                      activeIndex === index ? "rotate-180" : ""
-                    }`}
+                  <motion.span
+                    animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-gray-500"
                   >
                     ▼
-                  </span>
+                  </motion.span>
                 </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    activeIndex === index ? "max-h-40 mt-3" : "max-h-0"
-                  }`}
+                <motion.div
+                  animate={{ 
+                    height: activeIndex === index ? "auto" : 0,
+                    opacity: activeIndex === index ? 1 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
                 >
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed pt-3">
                     {faq.answer}
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
+      </motion.section>
     </>
   );
 };

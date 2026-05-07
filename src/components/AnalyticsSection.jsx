@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { TrendingUp, Users, Award, Target } from 'lucide-react';
 
 const AnalyticsSection = () => {
@@ -28,12 +29,16 @@ const AnalyticsSection = () => {
 
     // Animate counters
     const counterTimer = setTimeout(() => {
-      setCounters({
-        success: 85,
-        growth: 10,
-        students: 5000,
-        projects: 150
-      });
+      const interval = setInterval(() => {
+        setCounters(prev => ({
+          success: prev.success < 95 ? prev.success + 1 : 95,
+          growth: prev.growth < 5 ? prev.growth + 0.1 : 5,
+          students: prev.students < 10000 ? prev.students + 100 : 10000,
+          projects: prev.projects < 500 ? prev.projects + 5 : 500
+        }));
+      }, 20);
+
+      setTimeout(() => clearInterval(interval), 1000);
     }, 1200);
 
     return () => {
@@ -44,68 +49,132 @@ const AnalyticsSection = () => {
   }, []);
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-[#020617] via-[#0b0f19] to-[#020617]">
-      <div className="max-w-7xl mx-auto px-6">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="py-20 md:py-28 bg-gradient-to-br from-white via-blue-50 to-indigo-50"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-6"
+      >
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6">
             Real Results,
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               Real Impact
             </span>
           </h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Track your progress with our comprehensive analytics dashboard
           </p>
-        </div>
+        </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
             <div className="flex items-center justify-between mb-4">
-              <TrendingUp className="w-8 h-8 text-green-400" />
-              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">
+              <TrendingUp className="w-8 h-8 text-green-500" />
+              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-blue-600">
                 {counters.success}%
               </span>
             </div>
-            <p className="text-gray-400 text-sm">Success Rate</p>
-          </div>
+            <p className="text-gray-600 text-sm">Success Rate</p>
+          </motion.div>
 
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
             <div className="flex items-center justify-between mb-4">
-              <Target className="w-8 h-8 text-purple-400" />
-              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+              <Target className="w-8 h-8 text-purple-500" />
+              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-600">
                 {counters.growth}x
               </span>
             </div>
-            <p className="text-gray-400 text-sm">Career Growth</p>
-          </div>
+            <p className="text-gray-600 text-sm">Career Growth</p>
+          </motion.div>
 
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
             <div className="flex items-center justify-between mb-4">
-              <Users className="w-8 h-8 text-blue-400" />
-              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500">
+              <Users className="w-8 h-8 text-blue-500" />
+              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
                 {counters.students.toLocaleString()}
               </span>
             </div>
-            <p className="text-gray-400 text-sm">Active Students</p>
-          </div>
+            <p className="text-gray-600 text-sm">Active Students</p>
+          </motion.div>
 
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
             <div className="flex items-center justify-between mb-4">
-              <Award className="w-8 h-8 text-orange-400" />
-              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-red-500">
+              <Award className="w-8 h-8 text-orange-500" />
+              <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-600">
                 {counters.projects}+
               </span>
             </div>
-            <p className="text-gray-400 text-sm">Projects Completed</p>
-          </div>
-        </div>
+            <p className="text-gray-600 text-sm">Projects Completed</p>
+          </motion.div>
+        </motion.div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
           {/* Bar Chart */}
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="bg-white border border-slate-200 rounded-2xl p-8 shadow-lg"
+          >
             <h3 className="text-xl font-bold text-white mb-6">Monthly Progress</h3>
             <div className="flex items-end justify-between h-48">
               {barData.map((item, index) => (
@@ -124,16 +193,22 @@ const AnalyticsSection = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Line Chart */}
-          <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-8">
-            <h3 className="text-xl font-bold text-white mb-6">Skill Development</h3>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="bg-white border border-slate-200 rounded-2xl p-8 shadow-lg"
+          >
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Skill Development</h3>
             <div className="relative h-48">
               {/* Grid lines */}
               <div className="absolute inset-0 flex flex-col justify-between">
                 {[0, 25, 50, 75, 100].map((value) => (
-                  <div key={value} className="border-b border-white/10 w-full" />
+                  <div key={value} className="border-b border-slate-200 w-full" />
                 ))}
               </div>
               
@@ -161,10 +236,10 @@ const AnalyticsSection = () => {
               <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-purple-500 rounded-full animate-pulse" />
               <div className="absolute top-1/4 right-1/4 w-4 h-4 bg-indigo-500 rounded-full animate-pulse" />
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

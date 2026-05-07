@@ -1,40 +1,41 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, TrendingUp, Users, Award, Building, Globe } from 'lucide-react';
 
-const Stats = ({ darkMode }) => {
+const Stats = () => {
   const [counters, setCounters] = useState([0, 0, 0, 0]);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
   const targetValues = [1106887, 770453, 694, 25];
   const displayValues = ["1,106,887", "770,453", "694", "25+"];
-  const gradients = [
-    "from-blue-500 to-purple-500",
-    "from-purple-500 to-pink-500", 
-    "from-cyan-400 to-green-400",
-    "from-yellow-400 to-orange-400"
+  const textColors = [
+    "text-blue-600",
+    "text-indigo-600", 
+    "text-cyan-500",
+    "text-amber-500"
   ];
 
   const cardData = [
     {
       title: "ACTIVE LEARNERS",
       description: "Students completing assignments in real-time",
-      gradient: gradients[0]
+      textColor: textColors[0]
     },
     {
       title: "COMPLETED COURSES", 
       description: "Successfully finished internship programs",
-      gradient: gradients[1]
+      textColor: textColors[1]
     },
     {
       title: "COMPANIES",
       description: "Partner organizations hiring talent",
-      gradient: gradients[2]
+      textColor: textColors[2]
     },
     {
       title: "COUNTRIES",
       description: "Global reach across continents",
-      gradient: gradients[3]
+      textColor: textColors[3]
     }
   ];
 
@@ -91,103 +92,137 @@ const Stats = ({ darkMode }) => {
   };
 
   return (
-    <section ref={sectionRef} className={`py-24 px-6 transition-colors duration-500 ${
-      darkMode ? 'bg-[#020617] text-white' : 'bg-white text-gray-900'
-    }`}>
-      <div className="max-w-7xl mx-auto">
+    <motion.section 
+      ref={sectionRef}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="py-24 px-6 bg-gradient-to-br from-white via-blue-50 to-indigo-50"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto"
+      >
         {/* Top Pill Tag */}
-        <div className="text-center mb-8">
-          <div className={`inline-block px-4 py-1 rounded-full border text-xs tracking-widest backdrop-blur-md ${
-            darkMode 
-              ? 'border-cyan-400/30 text-cyan-400 bg-white/5' 
-              : 'border-gray-300 text-gray-600 bg-gray-50'
-          }`}>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <div className="inline-block px-6 py-2 rounded-full border text-xs tracking-widest font-medium bg-white/80 backdrop-blur-md border-blue-200 text-blue-600 shadow-sm">
             REAL-TIME PLATFORM GROWTH POWERED BY ACTIVE LEARNERS COMPLETING ASSIGNMENTS.
           </div>
-        </div>
+        </motion.div>
 
         {/* Main Heading */}
-        <div className="text-center mb-6">
-          <h2 className={`font-serif text-5xl md:text-6xl ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-center mb-6"
+        >
+          <h2 className="font-serif text-5xl md:text-6xl font-bold text-gray-900">
             Trusted by
           </h2>
-          <h2 className="font-serif text-5xl md:text-6xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <h2 className="font-serif text-6xl md:text-7xl tracking-tight leading-none text-blue-700">
             Students Worldwide
           </h2>
-        </div>
+        </motion.div>
 
         {/* Description */}
-        <p className={`max-w-2xl mx-auto mt-4 text-lg text-center ${
-          darkMode ? 'text-gray-400' : 'text-gray-600'
-        }`}>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto mt-4 text-lg text-center text-gray-600"
+        >
           Our platform connects ambitious students with real-world internship opportunities, 
           building careers through hands-on experience and professional mentorship.
-        </p>
+        </motion.p>
 
         {/* Metric Cards Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mt-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-4 gap-6 mt-16"
+        >
           {cardData.map((card, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`relative p-6 rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                darkMode ? 'bg-[#0a1628] border-white/10' : 'bg-gray-50 border-gray-200'
-              }`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8 }}
+              className="relative p-6 rounded-2xl border border-slate-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
             >
               {/* Background Glow */}
-              <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br ${card.gradient}`}></div>
+              <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br from-blue-400 to-cyan-400 group-hover:opacity-30 transition-opacity"></div>
               
               {/* Live Metric Label */}
-              <div className={`flex items-center gap-2 text-xs mb-4 relative z-10 ${
-                darkMode ? 'text-gray-400' : 'text-gray-500'
-              }`}>
+              <div className="flex items-center gap-2 text-xs mb-4 relative z-10 text-gray-500">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span>LIVE METRIC</span>
               </div>
 
               {/* Number with Gradient */}
-              <div className={`font-serif text-4xl md:text-5xl mb-2 relative z-10 text-transparent bg-clip-text bg-gradient-to-r ${card.gradient}`}>
+              <div className={`font-serif text-4xl md:text-5xl mb-2 relative z-10 ${card.title === "COMPLETED COURSES" ? 'text-6xl font-black tracking-tight bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-500 bg-clip-text text-transparent' : card.textColor} font-bold tracking-tight`}>
                 {formatNumber(counters[index], index)}
               </div>
 
               {/* Card Title */}
-              <div className={`font-semibold tracking-wide uppercase relative z-10 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>
+              <div className="font-semibold tracking-wide uppercase relative z-10 text-gray-900">
                 {card.title}
               </div>
 
               {/* Card Description */}
-              <div className={`text-sm mt-2 relative z-10 ${
-                darkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
+              <div className="text-sm mt-2 relative z-10 text-gray-600">
                 {card.description}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom Quote */}
-        <div className={`italic text-center mt-12 max-w-3xl mx-auto ${
-          darkMode ? 'text-gray-500' : 'text-gray-400'
-        }`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="italic text-center mt-12 max-w-3xl mx-auto text-gray-500 text-lg"
+        >
           "Our growth is driven by real learners completing real assignments — not passive course enrollments."
-        </div>
+        </motion.div>
 
         {/* CTA Button */}
-        <div className="text-center mt-8">
-          <button className={`px-8 py-3 rounded-full transition inline-flex items-center gap-2 hover:translate-x-1 ${
-            darkMode 
-              ? 'bg-blue-500 text-white hover:bg-blue-600' 
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-          }`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          viewport={{ once: true }}
+          className="text-center mt-8"
+        >
+          <motion.button 
+            className="px-8 py-3 rounded-full transition inline-flex items-center gap-2 bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Start Your Internship
             <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    </section>
+          </motion.button>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

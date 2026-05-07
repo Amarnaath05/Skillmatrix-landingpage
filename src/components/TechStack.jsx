@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Code, Database, Cloud, Brain } from 'lucide-react';
 
 const TechStack = () => {
@@ -57,43 +58,72 @@ const TechStack = () => {
   ];
 
   return (
-    <section className="bg-[#020617] text-white py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="py-24 px-6 bg-gradient-to-br from-white via-blue-50 to-indigo-50"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="max-w-6xl mx-auto"
+      >
         {/* Header */}
-        <div className="text-center">
-          <div className="text-blue-400 text-xs tracking-[0.3em] uppercase text-center font-medium">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="text-blue-600 text-xs tracking-[0.3em] uppercase text-center font-medium">
             SKILLS & TOOLS
           </div>
-          <h2 className="text-4xl md:text-5xl text-center mt-4 font-serif">
-            Technologies You'll <span className="text-cyan-400">Work With</span> During Your Internship
+          <h2 className="text-4xl md:text-5xl text-center mt-4 font-serif text-gray-900">
+            Technologies You'll <span className="text-blue-600">Work With</span> During Your Internship
           </h2>
-          <p className="text-gray-400 text-center mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-600 text-center mt-4 max-w-2xl mx-auto">
             Master cutting-edge technologies that power today's most innovative companies
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid Layout */}
-        <div className="grid md:grid-cols-2 gap-8 mt-16 max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 gap-8 mt-16 max-w-6xl mx-auto"
+        >
           {techCategories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <div
+              <motion.div
                 key={index}
-                className="relative p-6 rounded-2xl bg-[#0a1628] border border-white/5 overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="relative p-6 rounded-2xl bg-white border border-slate-200 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl group"
               >
                 {/* Background Glow */}
-                <div className={`absolute top-0 right-0 w-40 h-40 ${category.glowColor} blur-3xl rounded-full`}></div>
+                <div className={`absolute top-0 right-0 w-40 h-40 ${category.glowColor} blur-3xl rounded-full opacity-60 group-hover:opacity-80 transition-opacity`}></div>
 
                 {/* Card Header */}
                 <div className="flex items-start gap-4 mb-4 relative z-10">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-[#0f172a]">
-                    <Icon className="w-6 h-6 text-cyan-400" />
+                  <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white border border-slate-200 shadow-md">
+                    <Icon className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white">
+                    <h3 className="text-lg font-semibold text-gray-900">
                       {category.title}
                     </h3>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-600">
                       {category.subtitle}
                     </p>
                   </div>
@@ -102,19 +132,24 @@ const TechStack = () => {
                 {/* Technology Badges */}
                 <div className="flex flex-wrap gap-3 mt-4 relative z-10">
                   {category.technologies.map((tech, techIndex) => (
-                    <div
+                    <motion.div
                       key={techIndex}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-full bg-[#020617] border border-white/10 text-xs font-semibold text-white transition-all duration-300 ${tech.glow}`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.05 * techIndex }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.05 }}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-xs font-semibold text-gray-700 transition-all duration-300 shadow-sm hover:shadow-md ${tech.glow}`}
                     >
                       <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
                       {tech.name}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Bottom Quote */}
         <div className="text-center text-gray-500 italic mt-16">
@@ -122,14 +157,21 @@ const TechStack = () => {
         </div>
 
         {/* CTA Button */}
-        <button className="mt-6 mx-auto block px-6 py-3 rounded-full bg-white text-black font-medium hover:opacity-90 transition group">
+        <motion.button 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          className="mt-6 mx-auto block px-6 py-3 rounded-full bg-white text-black font-medium hover:opacity-90 transition group"
+        >
           Explore All Technologies
           <svg className="inline-block ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </button>
-      </div>
-    </section>
+        </motion.button>
+      </motion.div>
+    </motion.section>
   );
 };
 

@@ -12,7 +12,8 @@ html {
   transition-duration: 500ms;
 }
 
-@keyframes slideRight {
+/* Custom animations for marquee effect */
+@keyframes marquee {
   0% {
     transform: translateX(0);
   }
@@ -21,6 +22,43 @@ html {
   }
 }
 
-.animate-slide-right {
-  animation: slideRight 20s linear infinite;
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-[marquee_20s_linear_infinite] {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-[marquee_20s_linear_infinite_reverse] {
+  animation: marquee-reverse 20s linear infinite;
+}
+
+/* Premium light theme custom styles */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth hover transitions */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Award, ExternalLink, CheckCircle } from 'lucide-react';
 
 const Certificate = () => {
@@ -20,117 +21,147 @@ const Certificate = () => {
   };
 
   return (
-    <section className="bg-[#020617] text-white py-24 px-6">
-      <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="py-24 px-6 bg-gradient-to-br from-white via-blue-50 to-purple-50"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto"
+      >
         {/* Left Side (Text) */}
-        <div>
-          {/* Top Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 border border-white/10 text-xs uppercase tracking-wider text-gray-300">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-blue-100 border border-blue-200 text-xs uppercase tracking-wider text-blue-600">
             VERIFIED CREDENTIAL
           </div>
 
-          {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-serif mt-4">
-            Earn a Recognized <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Certificate of Completion</span>
+          <h2 className="text-4xl md:text-5xl font-serif mt-4 text-gray-900">
+            Earn a Recognized <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Certificate of Completion</span>
           </h2>
 
-          {/* Description */}
-          <p className="text-gray-400 mt-4 leading-relaxed">
+          <p className="text-gray-600 mt-4 leading-relaxed">
             Showcase your achievements with industry-recognized certificates that verify your skills and open doors to top opportunities.
           </p>
 
-          {/* Checklist Items */}
-          <div className="space-y-3 mt-6">
-            <div className="flex items-center gap-3 text-gray-300">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-3 mt-6"
+          >
+            <div className="flex items-center gap-3 text-gray-600">
+              <CheckCircle className="w-5 h-5 text-green-500" />
               <span>Verifiable online with unique certificate ID</span>
             </div>
-            <div className="flex items-center gap-3 text-gray-300">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+            <div className="flex items-center gap-3 text-gray-600">
+              <CheckCircle className="w-5 h-5 text-green-500" />
               <span>LinkedIn profile integration</span>
             </div>
-            <div className="flex items-center gap-3 text-gray-300">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+            <div className="flex items-center gap-3 text-gray-600">
+              <CheckCircle className="w-5 h-5 text-green-500" />
               <span>Industry-recognized credentials</span>
             </div>
-            <div className="flex items-center gap-3 text-gray-300">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+            <div className="flex items-center gap-3 text-gray-600">
+              <CheckCircle className="w-5 h-5 text-green-500" />
               <span>Lifetime validity</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium shadow-lg hover:opacity-90 transition">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-4 mt-8"
+          >
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium shadow-lg hover:shadow-xl transition"
+            >
               <span className="flex items-center gap-2">
                 <Award className="w-4 h-4" />
                 Start Your Journey
               </span>
-            </button>
+            </motion.button>
             
-            <button className="px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 rounded-full border border-slate-300 text-gray-700 hover:bg-slate-50 transition"
+            >
               <span className="flex items-center gap-2">
                 <ExternalLink className="w-4 h-4" />
                 Verify Certificate
               </span>
-            </button>
-          </div>
-        </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
 
         {/* Right Side (3D Interactive Card) */}
-        <div 
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className="relative [perspective:1000px]"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
           {/* Certificate Card */}
-          <div 
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
             style={{
               transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-              transformStyle: 'preserve-3d'
             }}
-            className="relative transition-transform duration-200 ease-out"
+            className="relative bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl transition-transform duration-200 ease-out overflow-hidden"
           >
-            <div 
-              style={{ transform: "translateZ(20px)" }}
-              className="bg-[#0a1628] border border-white/10 rounded-2xl p-8 shadow-2xl"
-            >
-              {/* Certificate Header */}
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Award className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Certificate of Completion</h3>
-                <p className="text-gray-400">Virtual Internship Program</p>
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 opacity-50"></div>
+            
+            {/* Certificate Content */}
+            <div className="relative text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full mb-6 shadow-lg">
+                <Award className="w-8 h-8 text-white" />
               </div>
-
-              {/* Certificate Body */}
-              <div className="text-center mb-8">
-                <p className="text-gray-300 mb-4">This is to certify that</p>
-                <p className="text-2xl font-bold text-white mb-4">John Doe</p>
-                <p className="text-gray-300 mb-4">has successfully completed</p>
-                <p className="text-xl font-semibold text-blue-400 mb-4">Web Development Internship</p>
-                <p className="text-gray-400 mb-2">with distinction</p>
+              
+              {/* Title */}
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Certificate of Completion</h3>
+              
+              {/* Subtitle */}
+              <p className="text-gray-600 mb-6">Internship Program</p>
+              
+              {/* Student Name */}
+              <div className="mb-6">
+                <p className="text-gray-500 text-sm mb-1">This certifies that</p>
+                <p className="text-xl font-semibold text-gray-900">John Doe</p>
               </div>
-
-              {/* Certificate Footer */}
-              <div className="flex justify-between items-end">
-                <div>
-                  <p className="text-gray-400 text-sm mb-1">Date</p>
-                  <p className="text-white font-semibold">April 2026</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-24 h-24 border-2 border-dashed border-gray-600 rounded-lg flex items-center justify-center mb-2">
-                    <span className="text-gray-400 text-xs">QR Code</span>
-                  </div>
-                  <p className="text-gray-400 text-xs">Verify Online</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-gray-400 text-sm mb-1">Certificate ID</p>
-                  <p className="text-white font-semibold">CA-2026-0427</p>
-                </div>
+              
+              {/* Completion Date */}
+              <div className="mb-6">
+                <p className="text-gray-500 text-sm mb-1">Completed on</p>
+                <p className="text-gray-900">June 15, 2024</p>
               </div>
-
+              
+              {/* Certificate ID */}
+              <div className="mb-8">
+                <p className="text-gray-500 text-sm mb-1">Certificate ID</p>
+                <p className="text-blue-600 font-mono">INF-2024-0615-001</p>
+              </div>
+              
               {/* Glare Effect */}
               <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden">
                 <div className="w-full h-full bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-300"/>
@@ -145,10 +176,10 @@ const Certificate = () => {
               <CheckCircle className="w-4 h-4" />
               <span className="text-sm font-medium">Verified & Valid</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 
